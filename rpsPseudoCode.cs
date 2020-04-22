@@ -6,9 +6,17 @@ namespace rpsProject
     //create enumerated list for each possible choice
     //{rock, paper, scissors}
 
+    public enum Choice 
+    {
+        rock,
+        paper,
+        scissors
+    }
+
     class Program
     {
         //number tie count
+        int tieCount = 0;
 
         static void Main(string[] args)
         {
@@ -86,12 +94,22 @@ namespace rpsProject
     //}
     
 
-    //small class to hold player names/scores {
+    //small struct to hold player names/scores {
+    public struct Player 
+    {
         //player name variable holder
+        public String playerName;
         //player score variable holder
+        public int playerScore;
 
         //initialize player variables(name) method
-    //}
+        public void SetPlayerName(String setPlayerName)
+        {
+            playerName = setPlayerName;
+        }
+
+        //}
+    }
 
     }
 }
