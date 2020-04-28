@@ -4,7 +4,6 @@ namespace CodingChallenge
 {
     class Program
     {
-    
         static void Main(string[] args)
         {
             // first initialize the variables for counting each scenario
@@ -40,7 +39,6 @@ namespace CodingChallenge
             // finally print out the total number of each scenario
             Console.WriteLine($"There were {sweetCount} sweet's, {saltyCount} salty's," +
                 $" and {sweetSaltyCount} sweet'nSalty's!");
-
         }
     }
 }

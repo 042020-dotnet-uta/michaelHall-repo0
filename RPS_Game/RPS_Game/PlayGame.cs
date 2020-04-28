@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+// using RPS_Game.Models;
 
 namespace RPS_Game
 {
     class PlayGame
     {
+        // create a DB context to manipulate the DB
+        RPS_DbContext db = new RPS_DbContext();
 
         //install the logger for a console app.
         private readonly ILogger _logger;
@@ -25,6 +29,9 @@ namespace RPS_Game
 
             Player p1 = new Player();
             p1.Name = "Mark";
+            db.Add(p1);
+            //db.Add(player2);
+            db.SaveChanges();
 
             _logger.LogInformation("LogInformation = Hello. My name is Log LogInformation");
             _logger.LogWarning("LogWarning = At {time} Now I'm Loggy McLoggerton", DateTime.Now);
@@ -35,6 +42,10 @@ namespace RPS_Game
 
 
             Console.WriteLine($"My name is {p1.Name}.");
+
+            var playerMark = db.Players.Where(p => p.Name == "Mark").FirstOrDefault();
+            Console.WriteLine($"The players name is {playerMark.Name} and " +
+                $"it's ID is {playerMark.PlayerID}");
         }
     }
 }
