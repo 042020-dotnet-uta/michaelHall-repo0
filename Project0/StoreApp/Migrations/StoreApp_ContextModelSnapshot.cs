@@ -7,7 +7,7 @@ using StoreApp;
 namespace StoreApp.Migrations
 {
     [DbContext(typeof(StoreApp_Context))]
-    partial class DbContextClassModelSnapshot : ModelSnapshot
+    partial class StoreApp_ContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,40 @@ namespace StoreApp.Migrations
                     b.HasKey("CustomerID");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("StoreApp.Product", b =>
+                {
+                    b.Property<int>("ProductID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Inventory")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ProductID");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("StoreApp.Store", b =>
+                {
+                    b.Property<int>("StoreID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("StoreID");
+
+                    b.ToTable("Stores");
                 });
 #pragma warning restore 612, 618
         }

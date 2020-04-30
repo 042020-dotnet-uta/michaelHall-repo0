@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace StoreApp
 {
     class Customer
     {
-        private int customerID;
-        public int CustomerID
-        {
-            get { return customerID; }
-            set { customerID = value; }
-        }
         #region Fields & Properties
-        // CustomerID - PK
+        
+        private int customerID;     // CustomerID - PK
+        //[ForeignKey("firstName")] foreign key example
         private string firstName;
         private string lastName;
         private string userName;
         private string password;
         private string defaultStore;
+
+        public int CustomerID
+        {
+            get { return customerID; }
+            set { customerID = value; }
+        }
 
         public string FirstName
         {

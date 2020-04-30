@@ -14,15 +14,10 @@ namespace StoreApp
         #region Methods
         public void StartApp()
         {
-            Console.WriteLine("Hello World!");
-            Customer custom1 = new Customer();
-            Console.WriteLine("Employee old name: " + custom1.FirstName);
-            custom1.FirstName = "Dyne Smith";
-            Console.WriteLine("Employee new name: " + custom1.FirstName);
-
             using (StoreApp_Context db = new StoreApp_Context())
             {
-                Console.WriteLine("Inserting new Customer");
+
+                /*Console.WriteLine("Inserting new Customer");
                 db.Add(new Customer { FirstName = "Mike", LastName = "Hall" });
                 db.SaveChanges();
 
@@ -40,11 +35,17 @@ namespace StoreApp
                 Console.WriteLine("Delete the Customer DB");
                 //db.Remove(customer);
                 Console.WriteLine(db.Customers);
-                //db.SaveChanges();
+                db.SaveChanges();
                 Console.WriteLine(customer.CustomerID);
-                Console.WriteLine(custom1.CustomerID);
 
-                
+                Store riteaid = new Store { Location = "RiteAid"};
+                db.Add<Store>(riteaid);
+                //db.Stores.Remove(db.Stores.First());
+                db.SaveChanges();
+                Product soap = new Product { Inventory = 2, Price = 4, ProductName = "soap", StoreID = 2};
+                db.Add<Product>(soap);
+                db.SaveChanges();
+                */
             }
         }
         #endregion
