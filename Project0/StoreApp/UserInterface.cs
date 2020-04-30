@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace StoreApp
         #region Methods
         public void StartApp()
         {
-            using (StoreApp_Context db = new StoreApp_Context())
+            using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
 
                 /*Console.WriteLine("Inserting new Customer");
@@ -44,8 +45,8 @@ namespace StoreApp
                 db.SaveChanges();
                 Product soap = new Product { Inventory = 2, Price = 4, ProductName = "soap", StoreID = 2};
                 db.Add<Product>(soap);
-                db.SaveChanges();
-                */
+                db.SaveChanges();*/
+                
             }
         }
         #endregion

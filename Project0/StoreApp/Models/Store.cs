@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StoreApp
 {
-    class Store
+    public class Store
     {
         #region Fields & Properties
         private int storeID;    // Primary Key
@@ -21,6 +21,13 @@ namespace StoreApp
             get { return location; }
             set { location = value; }
         }
+        #endregion
+
+        #region Methods
+       /* public override string ToString()
+        {
+         
+        }*/
         #endregion
     }
 }

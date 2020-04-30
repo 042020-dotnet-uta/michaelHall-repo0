@@ -6,7 +6,7 @@ using StoreApp;
 
 namespace StoreApp.Migrations
 {
-    [DbContext(typeof(StoreApp_Context))]
+    [DbContext(typeof(StoreApp_DbContext))]
     partial class StoreApp_ContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

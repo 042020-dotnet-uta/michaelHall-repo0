@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StoreApp
 {
-    class Product
+    public class Product
     {
         #region Fields & Properties
         private int productID;      // Primary Key

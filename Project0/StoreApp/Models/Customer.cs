@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StoreApp
 {
-    class Customer
+    public class Customer
     {
         #region Fields & Properties
         

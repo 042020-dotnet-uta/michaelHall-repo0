@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StoreApp
 {
-    class Order
+    public class Order
     {
         #region Fields & Properties
         private int orderID;   // Primary Key
