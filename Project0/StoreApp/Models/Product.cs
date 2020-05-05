@@ -9,11 +9,12 @@ namespace StoreApp
     {
         #region Fields & Properties
         private int productID;      // Primary Key
-        [ForeignKey("storeID")]
         private int storeID;
+        private Store store;
         private string productName;
         private int inventory;
-        private int price;
+        private double price;
+        private ICollection<Order> orders;
 
         public int ProductID
         {
@@ -25,6 +26,12 @@ namespace StoreApp
         {
             get { return storeID; }
             set { storeID = value; }
+        }
+
+        public Store Store
+        {
+            get { return store; }
+            set { store = value; }
         }
 
         public string ProductName
@@ -39,10 +46,16 @@ namespace StoreApp
             set { inventory = value; }
         }
 
-        public int Price
+        public double Price
         {
             get { return price; }
             set { price = value; }
+        }
+
+        public ICollection<Order> Orders
+        {
+            get { return orders; }
+            set { orders = value; }
         }
         #endregion
     }

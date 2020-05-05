@@ -9,6 +9,7 @@ namespace StoreApp
         #region Fields & Properties
         private int storeID;    // Primary Key
         private string location;
+        private ICollection<Product> products;
 
         public int StoreID
         {
@@ -20,6 +21,12 @@ namespace StoreApp
         {
             get { return location; }
             set { location = value; }
+        }
+
+        public ICollection<Product> Products
+        {
+            get { return products; }
+            set { products = value; }
         }
         #endregion
 

@@ -3,11 +3,16 @@ using System;
 using System.Linq;
 using Xunit;
 using StoreApp;
+using StoreApp.BusinessLogic;
 
 namespace Testing
 {
-    public class UnitTest1
+    public class UnitTesting
     {
+        /// <summary>
+        /// Tests the product model by adding to it and
+        /// verifying that the products show up in the database
+        /// </summary>
         [Fact]
         public void AddsProductToDb()
         {
@@ -40,6 +45,26 @@ namespace Testing
                 Assert.Equal(7, p1Name.StoreID);
                 Assert.Equal(1, p1Name.ProductID);
             }
+        }
+
+        [Fact]
+        public void CustomerInputValidationTest()
+        {
+            CustomerCreation validation = new CustomerCreation();
+
+            string nameTest1 = "Mike";
+            string nameTest2 = "4after";
+            string nameTest3 = "after@dark";
+            string usernameTest1 = "72838meah";
+            string usernameTest2 = "pie";
+            string usernameTest3 = "pie@2019withme";
+
+            Assert.True(validation.IsValidName(nameTest1));
+            Assert.False(validation.IsValidName(nameTest2));
+            Assert.False(validation.IsValidName(nameTest3));
+            Assert.True(validation.IsValidUserName(usernameTest1));
+            Assert.True(validation.IsValidUserName(usernameTest2));
+            Assert.False(validation.IsValidUserName(usernameTest3));
         }
     }
 }

@@ -10,12 +10,10 @@ namespace StoreApp
         #region Fields & Properties
         
         private int customerID;     // CustomerID - PK
-        //[ForeignKey("firstName")] foreign key example
         private string firstName;
         private string lastName;
         private string userName;
-        private string password;
-        private string defaultStore;
+        private ICollection<Order> orders;
 
         public int CustomerID
         {
@@ -41,16 +39,10 @@ namespace StoreApp
             set { userName = value; }
         }
 
-        public string Password
+        public ICollection<Order> Orders
         {
-            get { return password; }
-            set { password = value; }
-        }
-
-        public string DefaultStore
-        {
-            get { return defaultStore; }
-            set { defaultStore = value; }
+            get { return orders; }
+            set { orders = value; }
         }
         #endregion
 
