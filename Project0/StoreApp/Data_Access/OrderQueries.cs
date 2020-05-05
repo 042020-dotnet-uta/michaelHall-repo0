@@ -29,8 +29,18 @@ namespace StoreApp.Data_Access
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
+                var order = db.Orders
+                    .AsNoTracking()
+                    .Where(o => o.OrderID == id)
+                    .FirstOrDefault();
+                var time = order.Timestamp;
+
                 return db.Orders
                     .AsNoTracking()
+                    .Where(o => o.Timestamp == time)
+                    .Include(customer => customer.Customer)
+                    .Include(order => order.Product)
+                    .ThenInclude(product => product.Store)
                     .ToList();
             }
         }

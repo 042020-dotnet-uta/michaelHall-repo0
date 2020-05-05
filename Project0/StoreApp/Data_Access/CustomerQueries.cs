@@ -36,5 +36,41 @@ namespace StoreApp.Data_Access
                 }
             }
         }
+
+        public ICollection<Customer> GetCustomers()
+        {
+            using (StoreApp_DbContext db = new StoreApp_DbContext())
+            {
+                return db.Customers
+                    .AsNoTracking()
+                    .ToList();
+            }
+        }
+
+        public ICollection<Order> GetCustomerHistory(int id)
+        {
+            using (StoreApp_DbContext db = new StoreApp_DbContext())
+            {
+                return db.Orders
+                    .AsNoTracking()
+                    .Where(o => o.CustomerID == id)
+                    .Include(customer => customer.Customer)
+                    .Include(order => order.Product)
+                    .ThenInclude(product => product.Store)
+                    .OrderBy(o => o.Timestamp)
+                    .ToList();
+            }
+        }
+
+        public Customer GetCustomer(int id)
+        {
+            using (StoreApp_DbContext db = new StoreApp_DbContext())
+            {
+                return db.Customers
+                     .AsNoTracking()
+                     .Where(c => c.CustomerID == id)
+                     .FirstOrDefault();
+            }
+        }
     }
 }

@@ -337,12 +337,65 @@ namespace StoreApp
 
             var orderDetails = checkOrder.GetOrderDetails(orderID);
 
+            Console.WriteLine("Customer\tStore Location\t\tProduct\t\tQuantity\tTotal\tTimestamp");
+            foreach (var o in orderDetails)
+            {
+                double price = o.Product.Price * o.Quantity;
+                Console.WriteLine($"{o.Customer.FirstName} {o.Customer.LastName}\t" +
+                    $"{o.Product.Store.Location}\t\t{o.Product.ProductName}\t{o.Quantity}" +
+                    $"\t\t${price}\t{o.Timestamp}");
+            }
+
             Console.WriteLine("Press enter to return to the menu");
             Console.ReadLine();
         }
         
         public void DisplayStoreHistory()
         {
+            StoreQueries checkStore = new StoreQueries();
+            OrderCreation checkNum = new OrderCreation();
+
+            var stores = checkStore.GetStores();
+            Console.WriteLine("ID\tLocation");
+            foreach (var s in stores)
+            {
+                Console.WriteLine($"{s.StoreID}\t{s.Location}");
+            }
+
+            Console.WriteLine("Please enter an ID from above for the store location you would like to see.");
+            int storeID;
+            do
+            {
+                string input = Console.ReadLine();
+                while (!checkNum.IsValidNum(input))
+                {
+                    Console.WriteLine("Invalid ID number, please enter another.");
+                    input = Console.ReadLine();
+                }
+                int id = checkNum.StringToInt(input);
+                if (checkStore.IsValidStoreID(id))
+                {
+                    storeID = id;
+                }
+                else
+                {
+                    Console.WriteLine("There is no store with this ID, please enter another.");
+                    storeID = 0;
+                }
+            } while (storeID == 0);
+
+            var storeHistory = checkStore.GetStoreHistory(storeID);
+            var storeLocation = checkStore.GetStoreLocation(storeID);
+
+            Console.WriteLine($"Order history for {storeLocation}");
+            Console.WriteLine("Customer\tProduct\t\tQuantity\tTotal\t\tTimestamp");
+            foreach (var o in storeHistory)
+            {
+                double price = o.Product.Price * o.Quantity;
+                Console.WriteLine($"{o.Customer.FirstName} {o.Customer.LastName}\t" +
+                    $"{o.Product.ProductName}\t{o.Quantity}" +
+                    $"\t\t${price}\t\t{o.Timestamp}");
+            }
 
             Console.WriteLine("Press enter to return to the menu");
             Console.ReadLine();
@@ -350,6 +403,51 @@ namespace StoreApp
         
         public void DisplayCustomerHistory()
         {
+            CustomerQueries checkCustomer = new CustomerQueries();
+            OrderCreation checkNum = new OrderCreation();
+
+            var customers = checkCustomer.GetCustomers();
+            Console.WriteLine("ID\tFirst Name\tLast Name\tUsername");
+            foreach (var c in customers)
+            {
+                Console.WriteLine($"{c.CustomerID}\t{c.FirstName}" +
+                        $"\t\t{c.LastName}\t\t{c.UserName}");
+            }
+
+            Console.WriteLine("Please enter an ID from above for the customer you would like to see.");
+            int customerID;
+            do
+            {
+                string input = Console.ReadLine();
+                while (!checkNum.IsValidNum(input))
+                {
+                    Console.WriteLine("Invalid ID number, please enter another.");
+                    input = Console.ReadLine();
+                }
+                int id = checkNum.StringToInt(input);
+                if (checkCustomer.IsValidCustomerID(id))
+                {
+                    customerID = id;
+                }
+                else
+                {
+                    Console.WriteLine("There is no customer with this ID, please enter another.");
+                    customerID = 0;
+                }
+            } while (customerID == 0);
+
+            var customerHistory = checkCustomer.GetCustomerHistory(customerID);
+            var customer = checkCustomer.GetCustomer(customerID);
+
+            Console.WriteLine($"Order history for {customer.FirstName} {customer.LastName}");
+            Console.WriteLine("Location\tOrder ID\tProduct\t\tQuantity\tTotal\t\tTimestamp");
+            foreach (var o in customerHistory)
+            {
+                double price = o.Product.Price * o.Quantity;
+                Console.WriteLine($"{o.Product.Store.Location}\t{o.OrderID}\t\t" +
+                    $"{o.Product.ProductName}\t" +
+                    $"{o.Quantity}\t\t${price}\t\t{o.Timestamp}");
+            }
 
             Console.WriteLine("Press enter to return to the menu");
             Console.ReadLine();
