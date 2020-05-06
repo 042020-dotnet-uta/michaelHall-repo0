@@ -12,9 +12,22 @@ namespace StoreApp.Data_Access
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
-                return db.Products
+                try
+                {
+                    return db.Products
                     .AsNoTracking()
                     .ToList();
+                }
+                catch (Microsoft.Data.Sqlite.SqliteException)
+                {
+                    Console.WriteLine($"There is no customer table currently.");
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Exception occurred: {e}");
+                    return null;
+                }
             }
         }
 
@@ -22,20 +35,33 @@ namespace StoreApp.Data_Access
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
-                var check = db.Products
+                try
+                {
+                    var check = db.Products
                     .Where(c => c.ProductID == id);
 
-                var inventoryCheck = db.Products
-                    .AsNoTracking()
-                    .Where(c => c.ProductID == id)
-                    .FirstOrDefault();
-                if (check.Count() == 0 || inventoryCheck.Inventory == 0)
+                    var inventoryCheck = db.Products
+                        .AsNoTracking()
+                        .Where(c => c.ProductID == id)
+                        .FirstOrDefault();
+                    if (check.Count() == 0 || inventoryCheck.Inventory == 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                catch (Microsoft.Data.Sqlite.SqliteException)
                 {
+                    Console.WriteLine($"There is no customer table currently.");
                     return false;
                 }
-                else
+                catch (Exception e)
                 {
-                    return true;
+                    Console.WriteLine($"Exception occurred: {e}");
+                    return false;
                 }
             }
         }
@@ -44,10 +70,23 @@ namespace StoreApp.Data_Access
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
-                return db.Products
+                try
+                {
+                    return db.Products
                     .AsNoTracking()
                     .Where(p => p.ProductID == id)
                     .FirstOrDefault();
+                }
+                catch (Microsoft.Data.Sqlite.SqliteException)
+                {
+                    Console.WriteLine($"There is no customer table currently.");
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Exception occurred: {e}");
+                    return null;
+                }
             }
         }
 
@@ -55,19 +94,31 @@ namespace StoreApp.Data_Access
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
-                var check = db.Products
-                    .Where(p => p.ProductID == id)
-                    .FirstOrDefault();
-                if (check.Inventory < amount)
+                try
                 {
+                    var check = db.Products
+                   .Where(p => p.ProductID == id)
+                   .FirstOrDefault();
+                    if (check.Inventory < amount)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                catch (Microsoft.Data.Sqlite.SqliteException)
+                {
+                    Console.WriteLine($"There is no customer table currently.");
                     return false;
                 }
-                else
-                { 
-                    return true;
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Exception occurred: {e}");
+                    return false;
                 }
             }
-            return true;
         }
     }
 }

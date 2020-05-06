@@ -23,7 +23,7 @@ namespace StoreApp.BusinessLogic
             {
                 return false;
             }
-            else if (anInt < 0)
+            else if (anInt <= 0)
             {
                 return false;
             }

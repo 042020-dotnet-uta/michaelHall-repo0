@@ -12,15 +12,28 @@ namespace StoreApp.Data_Access
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
-                var check = db.Orders
-                    .Where(o => o.OrderID == id);
-                if (check.Count() == 0)
+                try
                 {
+                    var check = db.Orders
+                   .Where(o => o.OrderID == id);
+                    if (check.Count() == 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                catch (Microsoft.Data.Sqlite.SqliteException)
+                {
+                    Console.WriteLine($"There is no customer table currently.");
                     return false;
                 }
-                else
+                catch (Exception e)
                 {
-                    return true;
+                    Console.WriteLine($"Exception occurred: {e}");
+                    return false;
                 }
             }
         }
@@ -29,19 +42,32 @@ namespace StoreApp.Data_Access
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
-                var order = db.Orders
+                try
+                {
+                    var order = db.Orders
                     .AsNoTracking()
                     .Where(o => o.OrderID == id)
                     .FirstOrDefault();
-                var time = order.Timestamp;
+                    var time = order.Timestamp;
 
-                return db.Orders
-                    .AsNoTracking()
-                    .Where(o => o.Timestamp == time)
-                    .Include(customer => customer.Customer)
-                    .Include(order => order.Product)
-                    .ThenInclude(product => product.Store)
-                    .ToList();
+                    return db.Orders
+                        .AsNoTracking()
+                        .Where(o => o.Timestamp == time)
+                        .Include(customer => customer.Customer)
+                        .Include(order => order.Product)
+                        .ThenInclude(product => product.Store)
+                        .ToList();
+                }
+                catch (Microsoft.Data.Sqlite.SqliteException)
+                {
+                    Console.WriteLine($"There is no customer table currently.");
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Exception occurred: {e}");
+                    return null;
+                }
             }
         }
     }
