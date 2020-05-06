@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace StoreApp.BusinessLogic
 {
-    class OrderCreation
+    public class OrderCreation
     {
         public bool IsValidUserName(string userName)
         {
@@ -36,13 +36,16 @@ namespace StoreApp.BusinessLogic
         public int StringToInt(string input)
         {
             int anInt;
-            int.TryParse(input, out anInt);
+            if(!int.TryParse(input, out anInt))
+            {
+                return 0;
+            }
             return anInt;
         }
 
         public bool IsUnreasonableQuantity(int amount)
         {
-            if (amount >= 30)
+            if (amount >= 10)
             {
                 return true;
             }

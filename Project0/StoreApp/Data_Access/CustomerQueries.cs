@@ -6,17 +6,31 @@ using System.Linq;
 
 namespace StoreApp.Data_Access
 {
-    class CustomerQueries
+    public class CustomerQueries
     {
         public ICollection<Customer> CustomerSearch(string first, string last)
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
-                return db.Customers
-                    .AsNoTracking()
-                    .Where(c => c.FirstName.Contains(first) && c.LastName.Contains(last))
-                    .OrderBy(c => c.FirstName)
-                    .ToList();
+                 /*return db.Customers
+                   .AsNoTracking()
+                   .Where(c => c.FirstName.Contains(first) && c.LastName.Contains(last))
+                   .OrderBy(c => c.FirstName)
+                   .ToList();*/
+                  
+                try
+                {
+                    return db.Customers
+                   .AsNoTracking()
+                   .Where(c => c.FirstName.Contains(first) && c.LastName.Contains(last))
+                   .OrderBy(c => c.FirstName)
+                   .ToList();
+                }
+                catch (Microsoft.Data.Sqlite.SqliteException)
+                {
+                    Console.WriteLine($"There is no customer table currently.");
+                    return null;
+                }
             }
         }
         
@@ -24,15 +38,24 @@ namespace StoreApp.Data_Access
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
-                var check = db.Customers
+                try
+                {
+                    var check = db.Customers
                     .Where(c => c.CustomerID == id);
-                if (check.Count() == 0)
-                {
-                    return false;
+
+                    if (check.Count() == 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
-                else
+                catch (Microsoft.Data.Sqlite.SqliteException)
                 {
-                    return true;
+                    Console.WriteLine($"There is no customer table currently.");
+                    return false;
                 }
             }
         }

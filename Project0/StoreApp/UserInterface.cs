@@ -387,14 +387,21 @@ namespace StoreApp
             var storeHistory = checkStore.GetStoreHistory(storeID);
             var storeLocation = checkStore.GetStoreLocation(storeID);
 
-            Console.WriteLine($"Order history for {storeLocation}");
-            Console.WriteLine("Customer\tProduct\t\tQuantity\tTotal\t\tTimestamp");
-            foreach (var o in storeHistory)
+            if (storeHistory.Count() == 0)
             {
-                double price = o.Product.Price * o.Quantity;
-                Console.WriteLine($"{o.Customer.FirstName} {o.Customer.LastName}\t" +
-                    $"{o.Product.ProductName}\t{o.Quantity}" +
-                    $"\t\t${price}\t\t{o.Timestamp}");
+                Console.WriteLine($"As of now, no orders have been made from {storeLocation}");
+            }
+            else
+            { 
+                Console.WriteLine($"Order history for {storeLocation}");
+                Console.WriteLine("Customer\tProduct\t\tQuantity\tTotal\t\tTimestamp");
+                foreach (var o in storeHistory)
+                {
+                    double price = o.Product.Price * o.Quantity;
+                    Console.WriteLine($"{o.Customer.FirstName} {o.Customer.LastName}\t" +
+                        $"{o.Product.ProductName}\t{o.Quantity}" +
+                        $"\t\t${price}\t\t{o.Timestamp}");
+                }
             }
 
             Console.WriteLine("Press enter to return to the menu");
@@ -439,14 +446,21 @@ namespace StoreApp
             var customerHistory = checkCustomer.GetCustomerHistory(customerID);
             var customer = checkCustomer.GetCustomer(customerID);
 
-            Console.WriteLine($"Order history for {customer.FirstName} {customer.LastName}");
-            Console.WriteLine("Location\tOrder ID\tProduct\t\tQuantity\tTotal\t\tTimestamp");
-            foreach (var o in customerHistory)
+            if (customerHistory.Count() == 0)
             {
-                double price = o.Product.Price * o.Quantity;
-                Console.WriteLine($"{o.Product.Store.Location}\t{o.OrderID}\t\t" +
-                    $"{o.Product.ProductName}\t" +
-                    $"{o.Quantity}\t\t${price}\t\t{o.Timestamp}");
+                Console.WriteLine($"As of now, {customer.FirstName} {customer.LastName} has placed no orders.");
+            }
+            else
+            {
+                Console.WriteLine($"Order history for {customer.FirstName} {customer.LastName}");
+                Console.WriteLine("Location\tOrder ID\tProduct\t\tQuantity\tTotal\t\tTimestamp");
+                foreach (var o in customerHistory)
+                {
+                    double price = o.Product.Price * o.Quantity;
+                    Console.WriteLine($"{o.Product.Store.Location}\t{o.OrderID}\t\t" +
+                        $"{o.Product.ProductName}\t" +
+                        $"{o.Quantity}\t\t${price}\t\t{o.Timestamp}");
+                }
             }
 
             Console.WriteLine("Press enter to return to the menu");
