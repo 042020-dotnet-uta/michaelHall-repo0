@@ -11,30 +11,32 @@ namespace StoreApp
         private string location;
         private ICollection<Product> products;
 
+        /// <summary>
+        /// Property to get the storeID
+        /// </summary>
         public int StoreID
         {
             get { return storeID; }
-            set { storeID = value; }
+            set { ; }
         }
 
+        /// <summary>
+        /// Property to get and set the store's location
+        /// </summary>
         public string Location
         {
             get { return location; }
             set { location = value; }
         }
 
+        /// <summary>
+        /// Property for Foreign Key setup in Products
+        /// </summary>
         public ICollection<Product> Products
         {
             get { return products; }
             set { products = value; }
         }
-        #endregion
-
-        #region Methods
-       /* public override string ToString()
-        {
-         
-        }*/
         #endregion
     }
 }

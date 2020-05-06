@@ -8,12 +8,17 @@ namespace StoreApp.Data_Access
 {
     class StoreQueries
     {
+        /// <summary>
+        /// Returns all the store data within the store table.
+        /// </summary>
+        /// <returns></returns>
         public ICollection<Store> GetStores()
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
                 try
                 {
+                    // gets all the store data from the table
                     return db.Stores
                     .AsNoTracking()
                     .ToList();
@@ -31,12 +36,19 @@ namespace StoreApp.Data_Access
             }
         }
 
+        /// <summary>
+        /// Takes away the respective amount of product from the respective
+        /// store's inventory when an order is successfully placed.
+        /// </summary>
+        /// <param name="newOrder"></param>
         public void UpdateInventory(Order newOrder)
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
                 try
                 {
+                    // get the inventory for a store's product and update it
+                    // based on the given order that was just placed
                     var product = db.Products
                     .Where(p => p.ProductID == newOrder.ProductID)
                     .FirstOrDefault();
@@ -54,12 +66,19 @@ namespace StoreApp.Data_Access
             }
         }
 
+        /// <summary>
+        /// Checks to see if the given storeID is a valid one or not.
+        /// Returns true if it is and false if not.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool IsValidStoreID(int id)
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
                 try
                 {
+                    // get any store with the matching storeID
                     var check = db.Stores
                     .AsNoTracking()
                     .Where(s => s.StoreID == id);
@@ -86,12 +105,20 @@ namespace StoreApp.Data_Access
             }
         }
 
+        /// <summary>
+        /// Returns the history of all the orders made from a particular
+        /// store with the matching ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ICollection<Order> GetStoreHistory(int id)
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
                 try
                 {
+                    // get all the order data for the store with the
+                    // matching store ID
                     return db.Orders
                     .AsNoTracking()
                     .Where(o => o.Product.StoreID == id)
@@ -113,12 +140,18 @@ namespace StoreApp.Data_Access
             }
         }
 
+        /// <summary>
+        /// Returns the store info for the store matching the given store ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public string GetStoreLocation(int id)
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
                 try
                 {
+                    // get store info for store with matching store ID
                     var store = db.Stores
                      .AsNoTracking()
                      .Where(s => s.StoreID == id)

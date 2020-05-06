@@ -12,7 +12,7 @@ namespace Testing
     {
         /// <summary>
         /// Tests the product model by adding to it and
-        /// verifying that the products show up in the database
+        /// verifying that the products and their details show up in the database
         /// </summary>
         [Fact]
         public void AddsProductToDbTest()
@@ -48,6 +48,10 @@ namespace Testing
             }
         }
 
+        /// <summary>
+        /// Tests the store model by adding to it and
+        /// verifying that the stores and their details show up in the database
+        /// </summary>
         [Fact]
         public void AddsStoreToDbTest()
         {
@@ -79,6 +83,10 @@ namespace Testing
             }
         }
 
+        /// <summary>
+        /// Tests the customer model by adding to it and
+        /// verifying that the customers and their details show up in the database
+        /// </summary>
         [Fact]
         public void AddsCustomerToDbTest()
         {
@@ -114,6 +122,10 @@ namespace Testing
             }
         }
 
+        /// <summary>
+        /// Tests the order model by adding to it and
+        /// verifying that the orders and their details show up in the database
+        /// </summary>
         [Fact]
         public void AddsOrderToDbTest()
         {
@@ -151,86 +163,123 @@ namespace Testing
             }
         }
 
+        /// <summary>
+        /// Tests the IsValidName method to make sure it works properly
+        /// </summary>
         [Fact]
         public void ValidNameTest()
         {
+            // arrange
             CustomerCreation validation = new CustomerCreation();
 
+            // act
             string nameTest1 = "Mike";
             string nameTest2 = "4after";
             string nameTest3 = "after@dark";
 
+            // assert
             Assert.True(validation.IsValidName(nameTest1));
             Assert.False(validation.IsValidName(nameTest2));
             Assert.False(validation.IsValidName(nameTest3));
         }
 
+        /// <summary>
+        /// Tests the IsValidUserName method to make sure it works properly
+        /// </summary>
         [Fact]
         public void ValidUserNameTest()
         {
+            // arrange
             CustomerCreation validation = new CustomerCreation();
 
+            // act
             string usernameTest1 = "72838meah";
             string usernameTest2 = "pie";
             string usernameTest3 = "pie@2019withme";
 
+            // assert
             Assert.True(validation.IsValidUserName(usernameTest1));
             Assert.True(validation.IsValidUserName(usernameTest2));
             Assert.False(validation.IsValidUserName(usernameTest3));
         }
 
+        /// <summary>
+        /// Tests the IsValidNum method to make sure it works properly
+        /// </summary>
         [Fact]
         public void ValidNumTests()
         {
+            // arrange
             OrderCreation test = new OrderCreation();
 
+            // act
             string validNum1 = "Mike";
             string validNum2 = "32";
 
+            // assert
             Assert.False(test.IsValidNum(validNum1));
             Assert.True(test.IsValidNum(validNum2));
         }
 
+        /// <summary>
+        /// Tests the StringToInt method to make sure it works properly
+        /// </summary>
         [Fact]
         public void StringToIntTests()
         {
+            // arrange
             OrderCreation test = new OrderCreation();
 
+            // act
             string stringToInt1 = "45";
             string stringToInt2 = "word";
             string stringToInt3 = "273";
 
+            // assert
             Assert.Equal(45, test.StringToInt(stringToInt1));
             Assert.Equal(0, test.StringToInt(stringToInt2));
             Assert.Equal(273, test.StringToInt(stringToInt3));
         }
 
+        /// <summary>
+        /// Tests the IsUnreasonableQuantity method to make sure it works properly
+        /// </summary>
         [Fact]
         public void UnreasonableOrderTest()
         {
+            // arrange
             OrderCreation test = new OrderCreation();
 
+            // act
             int unreasonable1 = 25;
             int unreasonable2 = 5;
 
+            // assert
             Assert.True(test.IsUnreasonableQuantity(unreasonable1));
             Assert.False(test.IsUnreasonableQuantity(unreasonable2));
         }
 
+        /// <summary>
+        /// Tests the CustomerSearch method to make sure it works with an exception
+        /// where the exception is that there is no customer table/data
+        /// </summary>
         [Fact]
         public void CustomerQueryExceptionTest()
         {
-            CustomerQueries check = new CustomerQueries();
-            
-
-            //Arrange
+            // arrange
             var options = new DbContextOptionsBuilder<StoreApp_DbContext>()
                 .UseInMemoryDatabase(databaseName: "CustomerQueryExceptionTest")
                 .Options;
+            CustomerQueries check = new CustomerQueries();
 
+            // assert
             check.CustomerSearch("yes", "no");
         }
-        
+
+        /// <summary>
+        /// Tests the IsValidCustomerID method query to make sure it works properly
+        /// and without a table/data for an exception
+        /// </summary>
         [Fact]
         public void ValidCustomerIDQueryTest()
         {

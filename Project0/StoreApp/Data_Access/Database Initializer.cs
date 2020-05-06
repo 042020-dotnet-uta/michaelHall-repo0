@@ -6,12 +6,17 @@ namespace StoreApp.Data_Access
 {
     class Database_Initializer
     {
+        /// <summary>
+        /// Initializes the store and product database info
+        /// for the case that it has just been cleared or reset
+        /// </summary>
         public void SetUpDatabase()
         {
             using (StoreApp_DbContext db = new StoreApp_DbContext())
             {
                 try
                 {
+                    // adds store and product info when needed
                     db.Add(new Store { Location = "New York  " });
                     db.Add(new Store { Location = "Harrisburg" });
                     db.Add(new Store { Location = "Austin    " });

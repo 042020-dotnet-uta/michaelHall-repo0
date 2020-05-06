@@ -7,22 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200429162839_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200429162839_InitialCreate.Designer.cs" />
-    <Compile Remove="Migrations\20200429214713_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200429214713_InitialCreate.Designer.cs" />
-    <Compile Remove="Migrations\20200430013348_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200430013348_InitialCreate.Designer.cs" />
-    <Compile Remove="Migrations\20200504213002_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200504213002_InitialCreate.Designer.cs" />
-    <Compile Remove="Migrations\20200504222800_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200504222800_InitialCreate.Designer.cs" />
-    <Compile Remove="Migrations\20200505023031_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200505023031_InitialCreate.Designer.cs" />
-    <Compile Remove="Migrations\20200505031946_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200505031946_InitialCreate.Designer.cs" />
-    <Compile Remove="Migrations\20200505033001_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200505033001_InitialCreate.Designer.cs" />
+    <Compile Remove="Data_Access\Migrations\20200429162839_InitialCreate.cs" />
+    <Compile Remove="Data_Access\Migrations\20200429162839_InitialCreate.Designer.cs" />
+    <Compile Remove="Data_Access\Migrations\20200429214713_InitialCreate.cs" />
+    <Compile Remove="Data_Access\Migrations\20200429214713_InitialCreate.Designer.cs" />
+    <Compile Remove="Data_Access\Migrations\20200430013348_InitialCreate.cs" />
+    <Compile Remove="Data_Access\Migrations\20200430013348_InitialCreate.Designer.cs" />
+    <Compile Remove="Data_Access\Migrations\20200504213002_InitialCreate.cs" />
+    <Compile Remove="Data_Access\Migrations\20200504213002_InitialCreate.Designer.cs" />
+    <Compile Remove="Data_Access\Migrations\20200504222800_InitialCreate.cs" />
+    <Compile Remove="Data_Access\Migrations\20200504222800_InitialCreate.Designer.cs" />
+    <Compile Remove="Data_Access\Migrations\20200505023031_InitialCreate.cs" />
+    <Compile Remove="Data_Access\Migrations\20200505023031_InitialCreate.Designer.cs" />
+    <Compile Remove="Data_Access\Migrations\20200505031946_InitialCreate.cs" />
+    <Compile Remove="Data_Access\Migrations\20200505031946_InitialCreate.Designer.cs" />
+    <Compile Remove="Data_Access\Migrations\20200505033001_InitialCreate.cs" />
+    <Compile Remove="Data_Access\Migrations\20200505033001_InitialCreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
