@@ -23,7 +23,7 @@ namespace StoreApp
         public int OrderID
         {
             get { return orderID; }
-            set { ; }
+            set { orderID = value; }
         }
 
         /// <summary>
