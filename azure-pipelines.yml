@@ -21,7 +21,7 @@ stages:
     jobs:
       - job: 'build'
         steps:
-          - script: dotnet build 'project0/StoreApp.sln'
+          - script: dotnet build 'project0/StoreApp/StoreApp.csproj'
           - script: echo "Hey there $(instructor)!"
 
       - job: 'test'
