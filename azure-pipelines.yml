@@ -19,16 +19,19 @@ pr: 'none'
 stages:
   - stage:
     jobs:
+      # builds the solution file
       - job: 'build'
         steps:
           - script: dotnet build 'Project0/StoreApp.sln'
           - script: echo "Hey there $(student)!"
 
+      # runs the tests within the project (tesing folder .csproj file)
       - job: 'test'
         dependsOn: 'build'
         steps:
           - script: dotnet test 'Project0/Testing/Testing.csproj'
 
+      # publishes the solution
       - job: 'publish'
         dependsOn: 'test'
         steps:
