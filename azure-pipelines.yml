@@ -32,6 +32,6 @@ stages:
       - job: 'publish'
         dependsOn: 'test'
         steps:
-          - script: 'dotnet publish'
+          - script: dotnet publish 'Project0/StoreApp.sln'
 
 name: '$(date:yyyyMMdd)$(rev:rr)'
