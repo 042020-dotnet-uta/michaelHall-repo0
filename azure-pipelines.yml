@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-- name: 'instructor' 
+- name: 'student' 
   value: 'Michael'
 #watch for PR's
 pr: 'none'
@@ -22,12 +22,12 @@ stages:
       - job: 'build'
         steps:
           - script: dotnet build 'Project0/StoreApp.sln'
-          - script: echo "Hey there $(instructor)!"
+          - script: echo "Hey there $(student)!"
 
       - job: 'test'
         dependsOn: 'build'
         steps:
-          - script: 'dotnet test'
+          - script: dotnet test 'Project0/Testing/Testing.csproj'
 
       - job: 'publish'
         dependsOn: 'test'
